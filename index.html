@@ -9,29 +9,30 @@
 <body>
     <div class="conteiner">
         <div class="tela">
-            <input type="text">
+            <input type="text" id="input">
         </div>
         <div class="botoes">
             <div class="numeros">
-                <button class="botao">9</button>
-                <button class="botao">8</button>
-                <button class="botao">7</button>
-                <button class="botao">6</button>
-                <button class="botao">5</button>
-                <button class="botao">4</button>
-                <button class="botao">3</button>
-                <button class="botao">2</button>
-                <button class="botao">1</button>
-                <button class="botao">0</button>
-                <button class="botao">=</button>
+                <button class="botao" onclick="paraInput(9)">9</button>
+                <button class="botao" onclick="paraInput(8)">8</button>
+                <button class="botao" onclick="paraInput(7)">7</button>
+                <button class="botao" onclick="paraInput(6)">6</button>
+                <button class="botao" onclick="paraInput(5)">5</button>
+                <button class="botao" onclick="paraInput(4)">4</button>
+                <button class="botao" onclick="paraInput(3)">3</button>
+                <button class="botao" onclick="paraInput(2)">2</button>
+                <button class="botao" onclick="paraInput(1)">1</button>
+                <button class="botao" onclick="paraInput(0)">0</button>
+                <button class="botao" onclick="//paraInput('=')">=</button>
             </div>
             <div class="operacoes">
-                <button class="botao">÷</button>
-                <button class="botao">X</button>
-                <button class="botao">-</button>
-                <button class="botao" id="soma">+</button>
+                <button class="botao" id="dividir" onclick="paraInput('÷')">÷</button>
+                <button class="botao" onclick="paraInput('x')">X</button>
+                <button class="botao" id="menos" onclick="paraInput('-')">-</button>
+                <button class="botao" id="soma" onclick="paraInput('+')">+</button>
             </div>
         </div>
     </div>
+    <script src="script.js" defer></script>
 </body>
 </html>
