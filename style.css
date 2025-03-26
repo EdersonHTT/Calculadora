@@ -17,7 +17,8 @@ body {
     width: 500px;
     height: 700px;
     background-color: rgb(53, 61, 59);
-    border: 3px solid black;
+    border: 3px solid rgb(71, 82, 75);
+    box-shadow:  0px 0px 15px rgb(71, 82, 75) inset;
     display: flex;
     flex-direction: column;
     border-radius: 1rem;
@@ -42,6 +43,9 @@ body {
     padding: 20px;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     text-align: center;
+    border: 10px solid rgb(71, 82, 74);
+    background-color: rgb(223, 243, 233);
+    box-shadow:  0px 0px 10px rgb(71, 82, 74) inset;
 }
 
 .botoes {
@@ -68,9 +72,16 @@ body {
     height: auto;
     border-radius: 0.8rem;
     background-color: rgb(51, 51, 51);
-    box-shadow:  0px 0px 10px rgb(0, 255, 0) inset;
+    box-shadow:  0px 0px 10px rgb(71, 82, 74) inset;
+    border: 2px solid rgb(71, 82, 74);
     font-size: 25px;
     color: rgb(229, 255, 243);
+    transition: 200ms;
+    cursor: pointer;
+}
+
+.botao:active {
+    background-color: rgb(0, 131, 63);
 }
 
 .operacoes {
@@ -90,4 +101,8 @@ body {
 #soma {
     height: 200px;
     background-color: rgb(0, 206, 120);
+}
+
+#soma:active {
+    background-color: rgb(0, 131, 63);
 }
