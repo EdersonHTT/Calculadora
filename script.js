@@ -1,34 +1,36 @@
 function calculo (){
-    let nu1 = []
+    let nu = []
     let texto = input.value
     texto.toLowerCase()
     for(let i = 0; i < texto.length; i++){
         if(texto.slice(i-1,i) === "+"){
             let va = texto.slice(0,i-1)
-            nu1.push(va)
-            nu1.push("+")
+            nu.push(va)
+            nu.push("+")
             texto = texto.slice(i,texto.length)
             i = 0
         } else if(texto.slice(i-1,i) === "-"){
-            nu1.push(texto.slice(0,i-1))
-            nu1.push("-")
+            nu.push(texto.slice(0,i-1))
+            nu.push("-")
             texto = texto.slice(i,texto.length)
             i = 0
         } else if(texto.slice(i-1,i) === "x"){
-            nu1.push(texto.slice(0,i-1))
-            nu1.push("x")
+            nu.push(texto.slice(0,i-1))
+            nu.push("x")
             texto = texto.slice(i,texto.length)
             i = 0
         } else if(texto.slice(i-1,i) === "÷"){
-            nu1.push(texto.slice(0,i-1))
-            nu1.push("+")
+            nu.push(texto.slice(0,i-1))
+            nu.push("+")
             texto = texto.slice(i,texto.length)
             i = 0
-        } else {
-            nu1.push(texto.slice(i,texto.length))
         }
     }
-    console.log(nu1)
+    nu.push(texto.slice(0,texto.length))
+    if(nu[nu.length-1]  === "+" || nu[nu.length-1] === "-" || nu[nu.length-1] === "x" || nu[nu.length-1] === "÷"){
+        nu.pop()
+    }
+    console.log(nu)
     let valor
     for(let i = 0; i < nu.length; i++){
         switch (nu[i]){
@@ -70,34 +72,27 @@ function calculo (){
             break
         }
     }
-    // console.clear()
-    // console.log(nu)
     position = 0
+    console.log(nu)
     input.value = nu[0]
 }
 
 function paraInput (entrada){
-    if(nu[position].length === 0 && (entrada === "+" || entrada === "-" || entrada === "x" || entrada === "÷")){
+    if(input.value.length === 0 && (entrada === "+" || entrada === "-" || entrada === "x" || entrada === "÷")){
         input.value += 0
         input.value += entrada
-        nu[position] += 0
-        nu.push(entrada)
-        nu.push("")
-        position += 2
     } else if(!(entrada === "+" || entrada === "-" || entrada === "x" || entrada === "÷")){
         input.value += entrada
-        nu[position] += entrada
+        operador = false
     } else {
-        input.value += entrada
-        nu.push(entrada)
-        nu.push("")
-        position += 2
+        if(operador === false){
+            input.value += entrada
+            operador = true
+        }
     }
-    console.clear()
-    console.log(nu)
 }
 
-let position = 0
-let nu = [""]
+
+let operador = false
 
 const input = document.getElementById("input")
