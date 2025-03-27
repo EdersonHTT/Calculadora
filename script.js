@@ -1,5 +1,13 @@
 function calculo (){
-    
+    const nu = []
+    for(let i = 0; i < texto.length; i++){
+        const position = texto.split(texto.length-1, texto.length)
+        switch (texto){
+            case texto.includes("+"):
+
+            break
+        }
+    }
 }
 
 function paraInput (entrada){
