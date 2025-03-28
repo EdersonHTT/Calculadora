@@ -1,31 +1,39 @@
 function calculo (){
     let nu = []
     let texto = input.value
+    tentarDeNovo = true
     texto.toLowerCase()
-    for(let i = 0; i < texto.length; i++){
-        if(texto.slice(i-1,i) === "+"){
-            let va = texto.slice(0,i-1)
-            nu.push(va)
-            nu.push("+")
-            texto = texto.slice(i,texto.length)
-            i = 0
-        } else if(texto.slice(i-1,i) === "-"){
-            nu.push(texto.slice(0,i-1))
-            nu.push("-")
-            texto = texto.slice(i,texto.length)
-            i = 0
-        } else if(texto.slice(i-1,i) === "x"){
-            nu.push(texto.slice(0,i-1))
-            nu.push("x")
-            texto = texto.slice(i,texto.length)
-            i = 0
-        } else if(texto.slice(i-1,i) === "÷"){
-            nu.push(texto.slice(0,i-1))
-            nu.push("+")
-            texto = texto.slice(i,texto.length)
-            i = 0
+    do{
+        if(texto.slice(texto.length-1, texto.length) != "+" && texto.slice(texto.length-1, texto.length) != "-" && texto.slice(texto.length-1, texto.length) != "x" && texto.slice(texto.length-1, texto.length) != "÷"){
+            for(let i = 0; i < texto.length; i++){
+                if(texto.slice(i-1,i) === "+"){
+                    let va = texto.slice(0,i-1)
+                    nu.push(va)
+                    nu.push("+")
+                    texto = texto.slice(i,texto.length)
+                    i = 0
+                } else if(texto.slice(i-1,i) === "-"){
+                    nu.push(texto.slice(0,i-1))
+                    nu.push("-")
+                    texto = texto.slice(i,texto.length)
+                    i = 0
+                } else if(texto.slice(i-1,i) === "x"){
+                    nu.push(texto.slice(0,i-1))
+                    nu.push("x")
+                    texto = texto.slice(i,texto.length)
+                    i = 0
+                } else if(texto.slice(i-1,i) === "÷"){
+                    nu.push(texto.slice(0,i-1))
+                    nu.push("÷")
+                    texto = texto.slice(i,texto.length)
+                    i = 0
+                }
+            }
+            tentarDeNovo = false
+        } else {
+            texto += 0
         }
-    }
+    }while(tentarDeNovo)
     nu.push(texto.slice(0,texto.length))
     if(nu[nu.length-1]  === "+" || nu[nu.length-1] === "-" || nu[nu.length-1] === "x" || nu[nu.length-1] === "÷"){
         nu.pop()
@@ -75,6 +83,7 @@ function calculo (){
     position = 0
     console.log(nu)
     input.value = nu[0]
+    operador = false
 }
 
 function paraInput (entrada){
