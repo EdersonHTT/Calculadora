@@ -7,9 +7,10 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="conteiner">
+    <div id="conteiner">
         <div class="tela">
-            <input type="text" id="input">
+            <input type="text" id="input" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+            <p class="error">Valor Indefinido</p>
         </div>
         <div class="botoes">
             <div class="numeros">
@@ -22,8 +23,9 @@
                 <button class="botao" onclick="paraInput(3)">3</button>
                 <button class="botao" onclick="paraInput(2)">2</button>
                 <button class="botao" onclick="paraInput(1)">1</button>
+                <button class="botao" onclick="apagar()">←</button>
                 <button class="botao" onclick="paraInput(0)">0</button>
-                <button class="botao" onclick="calculo()">=</button>
+                <button class="botao" onclick="calculo()" id="igual">=</button>
             </div>
             <div class="operacoes">
                 <button class="botao" id="dividir" onclick="paraInput('÷')">÷</button>
@@ -34,5 +36,26 @@
         </div>
     </div>
     <script src="script.js" defer></script>
+    <script>
+        document.getElementById("conteiner").onmousedown = (e)=>{
+            let left = document.getElementById("conteiner").getBoundingClientRect().left
+            let top = document.getElementById("conteiner").getBoundingClientRect().top
+            document.getElementById("conteiner").onmousemove = (e)=>{
+                let styleX = window.getComputedStyle(document.getElementById("conteiner")).left
+                let styleY = window.getComputedStyle(document.getElementById("conteiner")).top
+                styleX = styleX.replace("px", " ")
+                styleY = styleY.split("px", " ")
+                const x = (e.clientX - left)
+                const y = (e.clientY - top) 
+                document.getElementById("conteiner").style.left = x+"px"
+                document.getElementById("conteiner").style.top = y+"px"
+            }
+        }
+
+        document.getElementById("conteiner").onmouseout = (e)=>{
+            document.getElementById("conteiner").onmousemove = false
+        }
+        
+    </script>
 </body>
 </html>

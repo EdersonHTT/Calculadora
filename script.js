@@ -35,9 +35,6 @@ function calculo (){
         }
     }while(tentarDeNovo)
     nu.push(texto.slice(0,texto.length))
-    if(nu[nu.length-1]  === "+" || nu[nu.length-1] === "-" || nu[nu.length-1] === "x" || nu[nu.length-1] === "÷"){
-        nu.pop()
-    }
     console.log(nu)
     let valor
     for(let i = 0; i < nu.length; i++){
@@ -80,16 +77,25 @@ function calculo (){
             break
         }
     }
-    position = 0
+    if(nu[0] === "Infinity" || nu[0] === "NaN" || nu[0] === "undefined"){
+        erroCalc[0].style.display = "flex"
+        nu[0] = ""
+        setTimeout(() => {
+            erroCalc[0].style.display = "none"
+        }, 1500);
+    }
     console.log(nu)
     input.value = nu[0]
     operador = false
 }
 
 function paraInput (entrada){
+    erroCalc[0].style.display = "none"
+
     if(input.value.length === 0 && (entrada === "+" || entrada === "-" || entrada === "x" || entrada === "÷")){
         input.value += 0
         input.value += entrada
+        operador = true
     } else if(!(entrada === "+" || entrada === "-" || entrada === "x" || entrada === "÷")){
         input.value += entrada
         operador = false
@@ -101,7 +107,12 @@ function paraInput (entrada){
     }
 }
 
+function apagar(){
+    input.value = input.value.slice(0, input.value.length-1)
+    operador = false
+}
 
 let operador = false
 
 const input = document.getElementById("input")
+const erroCalc = document.getElementsByClassName("error")
