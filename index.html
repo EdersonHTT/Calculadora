@@ -14,6 +14,9 @@
         </div>
         <div class="botoes">
             <div class="numeros">
+                <button class="botao" onclick="paraInput('.')">.</button>
+                <button class="botao" onclick="paraInput('√')">√</button>
+                <button class="botao" onclick="paraInput('%')">%</button>
                 <button class="botao" onclick="paraInput(9)">9</button>
                 <button class="botao" onclick="paraInput(8)">8</button>
                 <button class="botao" onclick="paraInput(7)">7</button>
@@ -37,25 +40,32 @@
     </div>
     <script src="script.js" defer></script>
     <script>
-        document.getElementById("conteiner").onmousedown = (e)=>{
+        function follow (e){
             let left = document.getElementById("conteiner").getBoundingClientRect().left
             let top = document.getElementById("conteiner").getBoundingClientRect().top
+            let posiMouseX = e.clientX
+            let posiMouseY = e.clientY
             document.getElementById("conteiner").onmousemove = (e)=>{
-                let styleX = window.getComputedStyle(document.getElementById("conteiner")).left
-                let styleY = window.getComputedStyle(document.getElementById("conteiner")).top
-                styleX = styleX.replace("px", " ")
-                styleY = styleY.split("px", " ")
-                const x = (e.clientX - left)
-                const y = (e.clientY - top) 
-                document.getElementById("conteiner").style.left = x+"px"
-                document.getElementById("conteiner").style.top = y+"px"
+                const x = e.clientX - (posiMouseX - left)
+                const y = e.clientY - (posiMouseY - top)
+                if(seguir === true){
+                    document.getElementById("conteiner").style.left = x+"px"
+                    document.getElementById("conteiner").style.top = y+"px"
+                }
             }
         }
-
-        document.getElementById("conteiner").onmouseout = (e)=>{
-            document.getElementById("conteiner").onmousemove = false
+        document.getElementById("conteiner").onmousedown = (e)=>{
+            if(e.target.className != "botao" && e.target.id != "input"){
+                seguir = true
+            } else {
+                seguir = false
+            }
+            follow(e)
         }
-        
+        document.getElementById("conteiner").onmouseup = ()=>{
+            seguir = false
+        }
+        let seguir
     </script>
 </body>
 </html>

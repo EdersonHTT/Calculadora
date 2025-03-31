@@ -6,27 +6,49 @@ function calculo (){
     do{
         if(texto.slice(texto.length-1, texto.length) != "+" && texto.slice(texto.length-1, texto.length) != "-" && texto.slice(texto.length-1, texto.length) != "x" && texto.slice(texto.length-1, texto.length) != "÷"){
             for(let i = 0; i < texto.length; i++){
-                if(texto.slice(i-1,i) === "+"){
-                    let va = texto.slice(0,i-1)
-                    nu.push(va)
-                    nu.push("+")
-                    texto = texto.slice(i,texto.length)
-                    i = 0
-                } else if(texto.slice(i-1,i) === "-"){
-                    nu.push(texto.slice(0,i-1))
-                    nu.push("-")
-                    texto = texto.slice(i,texto.length)
-                    i = 0
-                } else if(texto.slice(i-1,i) === "x"){
-                    nu.push(texto.slice(0,i-1))
-                    nu.push("x")
-                    texto = texto.slice(i,texto.length)
-                    i = 0
-                } else if(texto.slice(i-1,i) === "÷"){
-                    nu.push(texto.slice(0,i-1))
-                    nu.push("÷")
-                    texto = texto.slice(i,texto.length)
-                    i = 0
+                switch(texto.slice(i-1,i)){
+                    case "+":
+                        let va = texto.slice(0,i-1)
+                        nu.push(va)
+                        nu.push("+")
+                        texto = texto.slice(i,texto.length)
+                        i = 0
+                    break
+                    case "-":
+                        nu.push(texto.slice(0,i-1))
+                        nu.push("-")
+                        texto = texto.slice(i,texto.length)
+                        i = 0
+                    break
+                    case "x":
+                        nu.push(texto.slice(0,i-1))
+                        nu.push("x")
+                        texto = texto.slice(i,texto.length)
+                        i = 0
+                    break
+                    case "÷":
+                        nu.push(texto.slice(0,i-1))
+                        nu.push("÷")
+                        texto = texto.slice(i,texto.length)
+                        i = 0
+                    break   
+                    // case ".":
+                    //     nu.push(texto.slice(0,i-1))
+                    //     nu[nu.length-1] += texto.slice(0,i)
+                    //     texto = texto.slice(i,texto.length)
+                    //     i = 0
+                    // break
+                    case "%":
+                        nu.push(texto.slice(0,i-1))
+                        nu[nu.length-1] += texto.slice(0,i-1)
+                        texto = texto.slice(i,texto.length)
+                        i = 0
+                    break
+                    case "√":
+                        nu.push(Number(texto.slice(0,i-1)) * Number(texto.slice(0,i-1)))
+                        texto = texto.slice(i,texto.length)
+                        i = 0
+                    break
                 }
             }
             tentarDeNovo = false
@@ -50,6 +72,7 @@ function calculo (){
             break
             case "-":
                 valor = Number(nu[i-1]) - Number(nu[i+1])
+                alert(Number(nu[i-1]) , Number(nu[i+1]))
                 nu.shift()
                 nu.shift()
                 nu.shift()
