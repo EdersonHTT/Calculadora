@@ -4,12 +4,11 @@ function calculo (){
     tentarDeNovo = true
     texto.toLowerCase()
     do{
-        if(texto.slice(texto.length-1, texto.length) != "+" && texto.slice(texto.length-1, texto.length) != "-" && texto.slice(texto.length-1, texto.length) != "x" && texto.slice(texto.length-1, texto.length) != "÷"){
+        if(texto.slice(texto.length-1, texto.length) != "+" && texto.slice(texto.length-1, texto.length) != "-" && texto.slice(texto.length-1, texto.length) != "x" && texto.slice(texto.length-1, texto.length) != "÷" && texto.slice(texto.length-1, texto.length) != "%" && texto.slice(texto.length-1, texto.length) != "√"){
             for(let i = 0; i < texto.length; i++){
                 switch(texto.slice(i-1,i)){
                     case "+":
-                        let va = texto.slice(0,i-1)
-                        nu.push(va)
+                        nu.push(texto.slice(0,i-1))
                         nu.push("+")
                         texto = texto.slice(i,texto.length)
                         i = 0
@@ -32,21 +31,18 @@ function calculo (){
                         texto = texto.slice(i,texto.length)
                         i = 0
                     break   
-                    // case ".":
-                    //     nu.push(texto.slice(0,i-1))
-                    //     nu[nu.length-1] += texto.slice(0,i)
-                    //     texto = texto.slice(i,texto.length)
-                    //     i = 0
-                    // break
                     case "%":
-                        nu.push(texto.slice(0,i-1))
-                        nu[nu.length-1] += texto.slice(0,i-1)
-                        texto = texto.slice(i,texto.length)
+                        texto = texto.slice(0,i-1)
+                        texto = Number(texto)/100
+                        nu[0] = texto
+                        texto = false
                         i = 0
                     break
                     case "√":
-                        nu.push(Number(texto.slice(0,i-1)) * Number(texto.slice(0,i-1)))
-                        texto = texto.slice(i,texto.length)
+                        texto = texto.slice(0,i-1)
+                        texto = Number(texto)**(1/2)
+                        nu[0] = texto
+                        texto = false
                         i = 0
                     break
                 }
@@ -56,7 +52,9 @@ function calculo (){
             texto += 0
         }
     }while(tentarDeNovo)
-    nu.push(texto.slice(0,texto.length))
+    if(texto){
+        nu.push(texto.slice(0,texto.length))
+    }
     console.log(nu)
     let valor
     for(let i = 0; i < nu.length; i++){
@@ -72,7 +70,6 @@ function calculo (){
             break
             case "-":
                 valor = Number(nu[i-1]) - Number(nu[i+1])
-                alert(Number(nu[i-1]) , Number(nu[i+1]))
                 nu.shift()
                 nu.shift()
                 nu.shift()
@@ -115,13 +112,16 @@ function calculo (){
 function paraInput (entrada){
     erroCalc[0].style.display = "none"
 
-    if(input.value.length === 0 && (entrada === "+" || entrada === "-" || entrada === "x" || entrada === "÷")){
+    if(input.value.length === 0 && (entrada === "+" || entrada === "-" || entrada === "x" || entrada === "÷") && entrada !="√" && entrada !="%"){
         input.value += 0
         input.value += entrada
         operador = true
-    } else if(!(entrada === "+" || entrada === "-" || entrada === "x" || entrada === "÷")){
+    } else if(!(entrada === "+" || entrada === "-" || entrada === "x" || entrada === "÷") && entrada !="√" && entrada !="%"){
         input.value += entrada
         operador = false
+    } else if(entrada === "√" || entrada ==="%"){
+        input.value += entrada
+        calculo()
     } else {
         if(operador === false){
             input.value += entrada
