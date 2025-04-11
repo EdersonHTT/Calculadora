@@ -28,21 +28,17 @@ function calculo (){
                     case "÷":
                         nu.push(texto.slice(0,i-1))
                         nu.push("÷")
-                        texto = texto.slice(i,texto.length)
+                        texto = texto.slice(i, texto.length)
                         i = 0
                     break   
                     case "%":
-                        texto = texto.slice(0,i-1)
-                        texto = Number(texto)/100
-                        nu[0] = texto
-                        texto = false
+                        nu.push(Number(texto.slice(0,i-1))/100)
+                        texto = texto.slice(i, texto.length)
                         i = 0
                     break
                     case "√":
-                        texto = texto.slice(0,i-1)
-                        texto = Number(texto)**(1/2)
-                        nu[0] = texto
-                        texto = false
+                        nu.push(Number(texto.slice(0,i-1))**(1/2))
+                        texto = texto.slice(i, texto.length)
                         i = 0
                     break
                 }
@@ -52,9 +48,7 @@ function calculo (){
             texto += 0
         }
     }while(tentarDeNovo)
-    if(texto){
-        nu.push(texto.slice(0,texto.length))
-    }
+    nu.push(texto.slice(0,texto.length))
     console.log(nu)
     let valor
     for(let i = 0; i < nu.length; i++){
