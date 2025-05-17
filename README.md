@@ -1,2 +1,2 @@
 # Calculadora
-Calculadora para testes de programa
+Calculadora para pratica de programação.
